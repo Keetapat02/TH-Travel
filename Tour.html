@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TH Tour | 12 Tour ต้องห้ามพลาด</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #121212;
+            color: #fff;
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        .tour-header {
+            padding: 120px 0 60px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?q=80&w=2039&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+
+        .card {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            color: #fff;
+            transition: 0.3s;
+            height: 100%;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ffc107;
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .price-tag {
+            font-size: 1.2rem;
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .badge-tour {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+        }
+
+        .btn-save {
+            border: 1px solid #ffc107;
+            color: #ffc107;
+        }
+
+        .btn-save:hover {
+            background: #ffc107;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">TH-TRAVEL</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="trip.html">หน้าแรก</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tour.html">ทัวร์แนะนำ</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="booking.html">จองเลย</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Save.html">บันทึกไว้</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">ติดต่อเรา</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="tour-header">
+        <div class="container">
+            <h1 class="display-4 fw-bold">12 Tour ต้องห้ามพลาด</h1>
+            <p class="text-warning">เปิดประสบการณ์การเดินทางครั้งใหม่ ทั่วไทยราคาประหยัด</p>
+        </div>
+    </header>
+
+    <div class="container py-5">
+        <div class="row g-4">
+            <!-- 1. กรุงเทพฯ -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <span class="badge bg-danger badge-tour">เมืองหลวง</span>
+                    <img src="https://static.ticket2attraction.com/gallery/bd221224-494b-4648-b043-387be668e9b4/df288a76-dee2-4a7c-a5ad-6ef1574d92d0-1200.webp"
+                        class="card-img-top" alt="กรุงเทพฯ">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">กรุงเทพฯ</h5>
+                        <p class="card-text opacity-75 small">เที่ยววัดพระแก้ว ล่องเรือแม่น้ำเจ้าพระยา
+                            และช้อปปิ้งย่านสยาม</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">1,850.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('กรุงเทพฯ', '1,850.-', 'เมืองหลวง')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. ภูเก็ต -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <span class="badge bg-primary badge-tour">ยอดฮิต</span>
+                    <img src="https://teawtalay.com/wp-content/uploads/phuket-city-tour-5.jpg" class="card-img-top"
+                        alt="ภูเก็ต">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">ภูเก็ต</h5>
+                        <p class="card-text opacity-75 small">สัมผัสทะเลอันดามัน เที่ยวเมืองเก่าชิโนโปรตุกีส
+                            และแหลมพรหมเทพ</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">2,800.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('ภูเก็ต', '2,800.-', 'ทะเลใต้')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. ตัวอย่างที่ทำไว้มี เชียงใหม่ อันเดียว -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <!-- เพิ่มแท็ก <a> ครอบที่ตัวรูปภาพ -->
+                    <a href="detail.html">
+                        <img src="https://travel.mthai.com/app/uploads/2019/05/1498710820_19818.jpg"
+                            class="card-img-top" alt="เชียงใหม่" style="cursor: pointer;">
+                    </a>
+
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">เชียงใหม่</h5>
+                        <p class="card-text opacity-75 small">ไหว้พระธาตุดอยสุเทพ สัมผัสอากาศหนาว และคาเฟ่สุดชิคในนิมมาน
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">1,700.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('เชียงใหม่', '1,700.-', 'ภาคเหนือ')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. สุราษฎร์ธานี -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <img src="https://www.thaitoptour.com/wp-content/uploads/2020/04/1-e1587179214808.jpg"
+                        class="card-img-top" alt="สุราษฎร์ธานี">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">สุราษฎร์ธานี</h5>
+                        <p class="card-text opacity-75 small">ล่องเขื่อนเชี่ยวหลาน ชมกุ้ยหลินเมืองไทย และความงามของเขาสก
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">1,750.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('สุราษฎร์ธานี', '1,750.-', 'เขื่อนเชี่ยวหลาน')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. ชลบุรี -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <img src="https://www.ananda.co.th/blog/thegenc/wp-content/uploads/2024/03/%E0%B8%94%E0%B8%B5%E0%B9%84%E0%B8%8B%E0%B8%99%E0%B9%8C%E0%B8%97%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%B1%E0%B8%87%E0%B9%84%E0%B8%A1%E0%B9%88%E0%B9%84%E0%B8%94%E0%B9%89%E0%B8%95%E0%B8%B1%E0%B9%89%E0%B8%87%E0%B8%8A%E0%B8%B7%E0%B9%88%E0%B8%AD-2024-05-23T122306.610.png"
+                        class="card-img-top" alt="ชลบุรี">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">ชลบุรี</h5>
+                        <p class="card-text opacity-75 small">พักผ่อนชายหาดบางแสน เที่ยวสวนสัตว์เปิดเขาเขียว
+                            หรือไปเกาะล้าน</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">1,600.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('ชลบุรี', '1,600.-', 'บางแสน/เกาะล้าน')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. ระยอง -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <img src="https://f.tpkcdn.com/images-source/dd5c357d0e8a96e477fbcc2996a1ac08.JPG"
+                        class="card-img-top" alt="ระยอง">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">ระยอง</h5>
+                        <p class="card-text opacity-75 small">ข้ามเรือไปเกาะเสม็ด ชมทุ่งโปรงทอง และทานอาหารทะเลสดๆ</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">1,650.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('ระยอง', '1,650.-', 'เกาะเสม็ด')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. พระนครศรีอยุธยา -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <img src="https://static.thairath.co.th/media/dFQROr7oWzulq5Fa5K8Bwy6ysNayrt7pbxj4dlAbdMm2lknkBIWY5wW3GDCnusf8Mpf.webp"
+                        class="card-img-top" alt="อยุธยา">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">พระนครศรีอยุธยา</h5>
+                        <p class="card-text opacity-75 small">ทัวร์กรุงเก่า ไหว้พระมงคลบพิตร และชมวัดไชยวัฒนาราม</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">1,400.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('อยุธยา', '1,400.-', 'ไหว้พระกรุงเก่า')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. ประจวบคีรีขันธ์ -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <img src="https://img.thaicdn.net/u/2023/sireeporn/Travel-05/Hua-Hin07.jpg" class="card-img-top"
+                        alt="ประจวบคีรีขันธ์">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">ประจวบคีรีขันธ์</h5>
+                        <p class="card-text opacity-75 small">เที่ยวหัวหินสุดคลาสสิก ชมสถานีรถไฟ และหาดทรายขาวสะอาด</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">1,500.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('ประจวบฯ', '1,500.-', 'หัวหิน')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. ขอนแก่น -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <img src="https://images.lifestyleasia.com/wp-content/uploads/sites/8/2023/08/01003422/Hero-Image-1920-x-1080-1600x900.png"
+                        class="card-img-top" alt="ขอนแก่น">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">ขอนแก่น</h5>
+                        <p class="card-text opacity-75 small">ชมพระธาตุขามแก่น เที่ยวเขื่อนอุบลรัตน์ และไดโนเสาร์ภูเวียง
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">1,400.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('ขอนแก่น', '1,400.-', 'เขื่อนอุบลรัตน์')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. กาญจนบุรี -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <img src="https://img.salehere.co.th/p/1200x0/2024/05/30/rxf9bdm2tr64.jpg" class="card-img-top"
+                        alt="กาญจนบุรี">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">กาญจนบุรี</h5>
+                        <p class="card-text opacity-75 small">สะพานข้ามแม่น้ำแคว น้ำตกเอราวัณ และบรรยากาศริมน้ำสุดชิลล์
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">1,150.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('กาญจนบุรี', '1,150.-', 'ริมน้ำแคว')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. น่าน -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <img src="https://www.checkinchill.com/storage/content/cbc04875-d2c5-40a5-a52b-6697918752cf.webp"
+                        class="card-img-top" alt="น่าน">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">น่าน</h5>
+                        <p class="card-text opacity-75 small">กระซิบรักวัดภูมินทร์ ชมวิวถนนเลข 3
+                            และสัมผัสวิถีชีวิตสโลว์ไลฟ์</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">1,150.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('น่าน', '1,150.-', 'ถนนเลข 3')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. อุบลราชธานี -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow h-100">
+                    <img src="https://static.thairath.co.th/media/dFQROr7oWzulq5Fa4vQymmH23r0GQ4RW5aJLmNK9mpssgfey7ZGgIfaoUdFz3a0pidY.jpg"
+                        class="card-img-top" alt="อุบลราชธานี">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">อุบลราชธานี</h5>
+                        <p class="card-text opacity-75 small">ชมสามพันโบก แกรนด์แคนยอนเมืองไทย และวัดสิรินธรวราราม</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="price-tag">1,350.-</span>
+                            <div>
+                                <button class="btn btn-outline-warning btn-sm me-1"
+                                    onclick="saveTrip('อุบลฯ', '1,350.-', 'สามพันโบก')">บันทึก</button>
+                                <a href="booking.html" class="btn btn-warning btn-sm fw-bold">จองเลย</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript สำหรับหน้า tour.html (วางไว้ท้ายไฟล์ก่อนปิด body) -->
+        <script>
+            function saveTrip(name, price, note) {
+                let saved = JSON.parse(localStorage.getItem('mySavedTrips')) || [];
+                // เช็คว่าเคยบันทึกไปหรือยัง
+                if (saved.find(t => t.province === name)) {
+                    alert('คุณบันทึก ' + name + ' ไว้แล้วครับ');
+                } else {
+                    // เพิ่มข้อมูลใหม่
+                    saved.push({
+                        id: Date.now(),
+                        province: name,
+                        price: price,
+                        status: 'พร้อมเดินทาง',
+                        note: note
+                    });
+                    localStorage.setItem('mySavedTrips', JSON.stringify(saved));
+                    window.location.href = 'Save.html'; // เมื่อกดแล้วให้ไปหน้าบันทึกทันที
+                }
+            }
+        </script>
+    </div>
+
+    <script>
+        function saveTrip(name, price, note) {
+            let saved = JSON.parse(localStorage.getItem('mySavedTrips')) || [];
+            if (saved.find(t => t.province === name)) {
+                alert('คุณบันทึก ' + name + ' ไว้แล้ว!');
+            } else {
+                saved.push({ id: Date.now(), province: name, price: price, status: 'พร้อมเดินทาง', note: note });
+                localStorage.setItem('mySavedTrips', JSON.stringify(saved));
+                window.location.href = 'Save.html';
+            }
+        }
+    </script>
+</body>
+
+</html>

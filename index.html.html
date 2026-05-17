@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thailand Travel |</title>
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">TH-TRAVEL</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="trip.html">หน้าแรก</a></li>
+          <li class="nav-item"><a class="nav-link" href="Tour.html">ทัวร์แนะนำ</a></li>
+          <li class="nav-item"><a class="nav-link active" href="booking.html">จองเลย</a></li>
+          <li class="nav-item"><a class="nav-link" href="Save.html">บันทึกไว้</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <style>
+    /* บังคับให้เนื้อหาทุกอย่างแสดงผลทันที ไม่ต้องรอคลาส active */
+    .carousel-item .slide-content * {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    /* ตั้งค่าพื้นฐานให้สไลด์มีพื้นหลังสีดำไว้ก่อน เผื่อรูปโหลดช้า */
+    .carousel-item {
+      background-color: #000 !important;
+      min-height: 100vh;
+    }
+
+    /* ปรับให้รูปพื้นหลังแสดงผลแน่นอน */
+    .slide-bg {
+      opacity: 0.6 !important;
+      /* ปรับความเข้มรูปพื้นหลัง */
+      display: block !important;
+    }
+
+    .carousel-item.active h1 {
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .carousel-item.active p {
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .carousel-item.active .glass-card {
+      animation: fadeInRight 1.2s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      body {
+        overflow-y: auto;
+      }
+
+      .carousel-item {
+        height: auto;
+        min-height: 100vh;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+
+      .slide-content {
+        height: auto;
+        display: block;
+      }
+
+      .glass-card {
+        margin-bottom: 2rem;
+      }
+    }
+
+    /* เพิ่ม Hover ให้ Glass Card */
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    /* ปรับแต่งปุ่มให้ดูละมุนขึ้น */
+    .btn-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s;
+    }
+
+
+    body {
+      background: #111;
+      color: #fff;
+      font-family: 'Sarabun', sans-serif;
+      overflow: hidden;
+    }
+
+    /* ตั้งค่า Carousel แบบเต็มจอ */
+    .carousel-item {
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      /* ไล่เฉดสีดำให้ข้อความซ้ายและขวาอ่านง่ายขึ้น */
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.7) 100%);
+      z-index: 2;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 5;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    /* ปรับแต่งลูกศรซ้าย-ขวา */
+    .carousel-control-prev,
+    .carousel-control-next {
+      width: 8%;
+      z-index: 10;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      width: 3rem;
+      height: 3rem;
+      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.8));
+    }
+
+    /* ป้าย Tag (Badges) */
+    .tag-badge {
+      font-weight: normal;
+      padding: 0.4em 0.8em;
+      border-radius: 4px;
+      margin-right: 4px;
+      margin-bottom: 8px;
+      display: inline-block;
+      font-size: 0.85rem;
+    }
+
+    /* กล่องรายละเอียดฝั่งขวา (Glass Card) */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    /* กล่องแนะนำด้านล่างซ้าย (Bottom Left Highlight) */
+    .highlight-box {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .highlight-box img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    /* กล่อง Tip ของหน้ากรุงเทพ */
+    .tip-box {
+      background: #d0e1ff;
+      /* สีฟ้าน้ำเงินอ่อน */
+      color: #0b2253;
+      font-weight: bold;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-top: 30px;
+    }
+
+    /* กล่องย่อยใน Glass Card (เช่นหน้าภูเก็ต, โคราช) */
+    .inner-glass-box {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 10px;
+    }
+
+    /* ปุ่มหลัก */
+    .btn-custom {
+      border-radius: 6px;
+      padding: 0.5rem 1.2rem;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    /* รายการ (List) */
+    .custom-list {
+      padding-left: 1.5rem;
+      color: #ddd;
+    }
+
+    .custom-list li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ตัวสไลด์หลัก -->
+  <div id="travelCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-indicators" style="margin-bottom: 3rem;">
+      <button type="button" data-bs-target="#travelCarousel" data-bs-slide-to="0" class="active" aria-current="true"
+        style="width: 50px; height: 5px;"></button>
+      <button type="button" data-bs-target="#travelCarousel" data-bs-slide-to="1"
+        style="width: 50px; height: 5px;"></button>
+      <button type="button" data-bs-target="#travelCarousel" data-bs-slide-to="2"
+        style="width: 50px; height: 5px;"></button>
+      <button type="button" data-bs-target="#travelCarousel" data-bs-slide-to="3"
+        style="width: 50px; height: 5px;"></button>
+      <button type="button" data-bs-target="#travelCarousel" data-bs-slide-to="4"
+        style="width: 50px; height: 5px;"></button>
+    </div>
+    <div class="carousel-inner">
+
+      <!-- ================= Slide 1: เชียงใหม่ ================= -->
+      <div class="carousel-item active">
+
+        <div class="slide-bg"
+          style="background-image:url('https://thesunsight.com/wp-content/uploads/2020/01/DIntha-02-copy-1024x576.jpg');">
+        </div>
+        <div class="slide-overlay"></div>
+
+        <div class="slide-content">
+          <div class="container">
+            <div class="row align-items-center">
+
+              <!-- ฝั่งซ้าย -->
+              <div class="col-lg-7 pe-lg-5">
+                <div>
+                  <span class="btn tag-badge bg-warning text-dark">ภูเขา</span>
+                  <span class="btn bg-info text-dark">คาเฟ่</span>
+                  <span class="btn bg-success">วัฒนธรรม</span>
+                  <span class="btn bg-secondary text-light border border-secondary">ร้านอาหาร</span>
+                </div>
+                <h1 class="display-4 fw-bold mt-2 mb-3">เชียงใหม่</h1>
+                <p class="fs-5 text-light opacity-75 mb-4">เมืองยอดฮิตของสายธรรมชาติและคาเฟ่ วิวภูเขา อากาศดี
+                  และแหล่งวัฒนธรรมล้านนา เหมาะทั้งทริปชิลและทริปถ่ายรูป</p>
+
+                <div class="d-flex gap-2 flex-wrap">
+                  <button class="btn btn-primary btn-custom">ดูไฮไลต์</button>
+                  <button class="btn btn-outline-light btn-custom">แผนที่ (ตัวอย่าง)</button>
+                  <button class="btn btn-light btn-custom">น้ำตก</button>
+                </div>
+
+                <div class="highlight-box">
+                  <img
+                    src="https://image-tc.galaxy.tf/wijpeg-sxrfid5inslt46adwg0pwpho/intanon_standard.jpg?crop=112%2C0%2C1777%2C1333&width=928"
+                    alt="Doi Inthanon">
+                  <div class="flex-grow-1">
+                    <h5 class="mb-1 fw-bold">แนะนำ: ดอยอินทนนท์</h5>
+                    <p class="mb-0 small text-light opacity-75">เที่ยวทะเลหมอก จุดสูงสุดของไทย และเส้นทางธรรมชาติ</p>
+                  </div>
+                  <span class="badge bg-primary">Top Spot</span>
+                </div>
+              </div>
+
+              <!-- ฝั่งขวา -->
+              <div class="col-lg-5 mt-5 mt-lg-0">
+                <div class="glass-card">
+                  <h4 class="fw-bold mb-3">สิ่งที่ควรทำ</h4>
+                  <ul class="custom-list mb-4">
+                    <li>เดินเล่นย่านเมืองเก่าและวัดสวยๆ</li>
+                    <li>คาเฟ่วิวเขา + จุดชมพระอาทิตย์ขึ้น</li>
+                    <li>ชิมอาหารเหนือ: ข้าวซอย, ไส้อั่ว</li>
+                  </ul>
+                  <div class="d-grid gap-2">
+                    <div class="badge border border-light text-light p-2" style="font-weight: normal;">
+                      เหมาะกับ: สัมผัสอากาศหนาว, วัฒนธรรม, คาเฟ่
+                    </div>
+                    <div class="badge bg-danger p-2" style="font-weight: normal;">
+                      ช่วงแนะนำ: พ.ย. - ก.พ.
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mt-4">
+                    <small class="text-secondary">Slide 1</small>
+                    <a href="booking.html"
+                      class="btn btn-outline-warning badge bg-danger border border-secondary text-decoration-none">จองเลย</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= Slide 2: ภูเก็ต ================= -->
+      <div class="carousel-item">
+        <div class="slide-bg"
+          style="background-image:url('https://blog-static.kkday.com/th/blog/wp-content/uploads/Thailand_Phuket_Ashutterstock_329246918.jpg');">
+        </div>
+        <div class="slide-overlay"></div>
+
+        <div class="slide-content">
+          <div class="container">
+            <div class="row align-items-center">
+
+              <!-- ฝั่งซ้าย -->
+              <div class="col-lg-7 pe-lg-5">
+                <div>
+                  <span class="btn bg-primary">ทะเล</span>
+                  <span class="btn bg-light text-dark">Island Hopping</span>
+                  <span class="btn bg-danger">Sunset</span>
+                  <span class="btn bg-dark text-light border border-secondary">เหมาะกับหน้าร้อน</span>
+                </div>
+                <h1 class="display-4 fw-bold mt-2 mb-3">ภูเก็ต</h1>
+                <p class="fs-5 text-light opacity-75 mb-4">ทะเลสวย กิจกรรมครบ ตั้งแต่ดำน้ำ เล่นเซิร์ฟ
+                  ไปจนถึงคาเฟ่ริมทะเล และการเที่ยวแบบยามค่ำคืนที่คึกคัก</p>
+
+                <div class="d-flex gap-2 flex-wrap">
+                  <button class="btn btn-primary btn-custom">ชายหาดแนะนำ</button>
+                  <button class="btn btn-outline-light btn-custom">ทริป 1 วัน</button>
+                  <button class="btn btn-outline-info btn-custom">ดำน้ำ (ตัวอย่าง)</button>
+                </div>
+
+                <div class="highlight-box">
+                  <img src="https://img.wongnai.com/p/1600x0/2019/12/21/71fd290d8f494c4f92d6a3187b619a2a.jpg">
+                  <div class="flex-grow-1">
+                    <h5 class="mb-1 fw-bold">แนะนำ: แหลมพรหมเทพ</h5>
+                    <p class="mb-0 small text-light opacity-75">จุดชมพระอาทิตย์ตกชื่อดัง บรรยากาศดี ถ่ายรูปสวย</p>
+                  </div>
+                  <span class="badge bg-warning text-dark">Sunset Spot</span>
+                </div>
+              </div>
+
+              <!-- ฝั่งขวา -->
+              <div class="col-lg-5 mt-5 mt-lg-0">
+                <div class="glass-card">
+                  <h4 class="fw-bold mb-3">เช็คลิสต์ก่อนเที่ยว</h4>
+                  <div class="row mb-4">
+                    <div class="col-6">
+                      <div class="inner-glass-box h-100">
+                        <strong class="d-block mb-1">ครีมกันแดด</strong>
+                        <small class="text-light opacity-75">จำเป็นมาก</small>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="inner-glass-box h-100">
+                        <strong class="d-block mb-1">รองเท้าแตะ</strong>
+                        <small class="text-light opacity-75">เดินชายหาด</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-grid gap-2">
+                    <div class="badge border border-light text-light p-2" style="font-weight: normal;">
+                      เหมาะกับ: เที่ยวทะเลและเกาะฝั่งอันดามัน
+                    </div>
+                    <div class="badge bg-danger p-2" style="font-weight: normal;">
+                      ช่วงแนะนำ: พ.ย. - เม.ย.
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between mt-4">
+                    <small class="text-secondary">Slide 2</small>
+                    <a href="booking.html"
+                      class="btn btn-outline-warning badge bg-danger border border-secondary text-decoration-none">จองเลย</a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= Slide 3: กาญจนบุรี ================= -->
+        <div class="carousel-item">
+
+          <div class="slide-bg"
+            style="background-image:url('https://www.riverkwairesotel.net/wp-content/uploads/2024/03/5.%E0%B8%96%E0%B9%89%E0%B8%B3%E0%B8%81%E0%B8%A3%E0%B8%B0%E0%B9%81%E0%B8%8B-1024x640.webp');">
+
+          </div>
+
+          <div class="slide-overlay"></div>
+
+
+
+          <div class="slide-content">
+
+            <div class="container">
+
+              <div class="row align-items-center">
+
+
+
+                <!-- ฝั่งซ้าย -->
+
+                <div class="col-lg-7 pe-lg-5">
+
+                  <div>
+
+                    <span class="btn tag-badge bg-success">ธรรมชาติ</span>
+
+                    <span class="btn tag-badge bg-secondary">ประวัติศาสตร์</span>
+
+                    <span class="btn tag-badge bg-info text-dark">น้ำตก</span>
+
+                    <span class="btn tag-badge bg-dark text-light border border-secondary">เหมาะกับทริป 2 วัน</span>
+
+                  </div>
+
+                  <h1 class="display-4 fw-bold mt-2 mb-3">กาญจนบุรี</h1>
+
+                  <p class="fs-5 text-light opacity-75 mb-4">เมืองใกล้กรุงเทพฯ ที่ครบทั้งน้ำตก เขื่อน
+
+                    และสถานที่ประวัติศาสตร์ เหมาะกับการพักผ่อนแบบธรรมชาติ หรือไปเป็นแก๊งเพื่อน</p>
+
+
+
+                  <div class="d-flex gap-2 flex-wrap">
+
+                    <button class="btn btn-success btn-custom">ธรรมชาติ</button>
+
+                    <button class="btn btn-outline-light btn-custom">สะพานข้ามแม่น้ำแคว</button>
+
+                    <button class="btn btn-outline-warning btn-custom">คาเฟ่ริมน้ำ</button>
+
+                  </div>
+
+
+
+                  <div class="highlight-box">
+
+                    <img src="https://www.sabaiatkan.com/wp-content/uploads/2014/11/erawan-waterfall-3.jpg">
+
+                    <div class="flex-grow-1">
+
+                      <h5 class="mb-1 fw-bold">แนะนำ: น้ำตกเอราวัณ</h5>
+
+                      <p class="mb-0 small text-light opacity-75">น้ำใสสีฟ้า หลายชั้น เดินทางสะดวก (ปรับรายละเอียดได้)
+
+                      </p>
+
+                    </div>
+
+                    <span class="badge bg-success">Nature</span>
+
+                  </div>
+
+                </div>
+
+
+
+                <!-- ฝั่งขวา -->
+
+                <div class="col-lg-5 mt-5 mt-lg-0">
+
+                  <div class="glass-card">
+
+                    <h4 class="fw-bold mb-3">ทริคการเที่ยว</h4>
+
+                    <ul class="custom-list mb-4">
+
+                      <li>ไปน้ำตกช่วงเช้า คนจะน้อยกว่า</li>
+
+                      <li>พกชุดเล่นน้ำและถุงกันน้ำ</li>
+
+                      <li>ถ้าค้างคืน เลือกที่พักริมน้ำ/แพ</li>
+
+                    </ul>
+
+                    <div class="d-grid gap-2">
+
+                      <div class="badge border border-light text-light p-2" style="font-weight: normal;">
+
+                        เหมาะกับ: นอนแพริมน้ำ, น้ำตก, ประวัติศาสตร์
+
+                      </div>
+
+                      <div class="badge bg-danger p-2" style="font-weight: normal;">
+
+                        ช่วงแนะนำ: ส.ค. - พ.ย. (หรือทั้งปี)
+
+                      </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+
+                      <small class="text-secondary">Slide 3</small>
+
+                      <a href="booking.html"
+                        class="btn btn-outline-warning badge bg-danger border border-secondary text-decoration-none">จองเลย</a>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ================= Slide 4: นครราชสีมา ================= -->
+
+        <div class="carousel-item">
+
+          <div class="slide-bg"
+            style="background-image:url('https://f.ptcdn.info/178/065/000/pv6sqw8b7dF0WLmrTIHW-o.jpg');"></div>
+
+          <div class="slide-overlay"></div>
+
+
+
+          <div class="slide-content">
+
+            <div class="container">
+
+              <div class="row align-items-center">
+
+
+
+                <!-- ฝั่งซ้าย -->
+
+                <div class="col-lg-7 pe-lg-5">
+
+                  <div>
+
+                    <span class="btn bg-warning text-dark">คาเฟ่วิวเขา</span>
+
+                    <span class="btn tag-badge bg-success">ธรรมชาติ</span>
+
+                    <span class="btn tag-badge bg-light text-dark">Road Trip</span>
+
+                    <span class="btn tag-badge bg-dark text-light border border-secondary">ใกล้กรุงเทพฯ</span>
+
+                  </div>
+
+                  <h1 class="display-4 fw-bold mt-2 mb-3">นครราชสีมา (โคราช)</h1>
+
+                  <p class="fs-5 text-light opacity-75 mb-4">จุดหมายยอดนิยมสำหรับสาย Road Trip ไปเขาใหญ่ ฟาร์ม คาเฟ่
+
+                    และจุดถ่ายรูป เหมาะกับการขับรถเที่ยวแบบชิลๆ</p>
+
+
+
+                  <div class="d-flex gap-2 flex-wrap">
+
+                    <button class="btn btn-warning btn-custom text-dark">เขาใหญ่</button>
+
+                    <button class="btn btn-outline-light btn-custom">คาเฟ่/ฟาร์ม</button>
+
+                    <button class="btn btn-outline-success btn-custom">เส้นทางแนะนำ</button>
+
+                  </div>
+
+
+
+                  <div class="highlight-box">
+
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Haew_Suwat_Waterfall_Khao-Yai02.jpg/330px-Haew_Suwat_Waterfall_Khao-Yai02.jpg">
+
+                    <div class="flex-grow-1">
+
+                      <h5 class="mb-1 fw-bold">แนะนำ: อุทยานแห่งชาติเขาใหญ่</h5>
+
+                      <p class="mb-0 small text-light opacity-75">เดินป่า ชมน้ำตก และจุดชมวิว (ควรเช็คฤดูกาลก่อน)</p>
+
+                    </div>
+
+                    <span class="badge bg-warning text-dark">Must Go</span>
+
+                  </div>
+
+                </div>
+
+
+
+                <!-- ฝั่งขวา -->
+
+                <div class="col-lg-5 mt-5 mt-lg-0">
+
+                  <div class="glass-card">
+
+                    <h4 class="fw-bold mb-3">กิจกรรมแนะนำ</h4>
+
+                    <div class="inner-glass-box d-flex justify-content-between align-items-center">
+
+                      <div>
+
+                        <strong class="d-block">ชมหมอกตอนเช้า</strong>
+
+                        <small class="text-light opacity-75">เหมาะกับฤดูฝนปลายๆ-หนาว</small>
+
+                      </div>
+
+                      <span class="badge bg-info text-dark">Morning</span>
+
+                    </div>
+
+                    <div class="inner-glass-box d-flex justify-content-between align-items-center mb-4">
+
+                      <div>
+
+                        <strong class="d-block">คาเฟ่วิวธรรมชาติ</strong>
+
+                        <small class="text-light opacity-75">มีหลายโซนให้เลือก</small>
+
+                      </div>
+
+                      <span class="badge bg-success">Chill</span>
+
+                    </div>
+
+
+
+                    <div class="d-grid gap-2">
+
+                      <div class="badge border border-light text-light p-2" style="font-weight: normal;">
+
+                        เหมาะกับ: เที่ยวธรรมชาติ, เขาใหญ่, คาเฟ่
+
+                      </div>
+
+                      <div class="badge bg-danger p-2" style="font-weight: normal;">
+
+                        ช่วงแนะนำ: ต.ค. - ก.พ.
+
+                      </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+
+                      <small class="text-secondary">Slide 4</small>
+
+                      <a href="booking.html"
+                        class="btn btn-outline-warning badge bg-danger border border-secondary text-decoration-none">จองเลย</a>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ================= Slide 5: กรุงเทพฯ ================= -->
+
+        <div class="carousel-item">
+
+          <div class="slide-bg"
+            style="background-image:url('https://static.thairath.co.th/media/dFQROr7oWzulq5Fa6ri5y87RLetHAweqS5WNpAUiYhhSBff9egi6NDmvMzNcvFoiZpQ.webp');">
+
+          </div>
+
+          <div class="slide-overlay"></div>
+
+
+
+          <div class="slide-content">
+
+            <div class="container">
+
+              <div class="row align-items-center">
+
+
+
+                <!-- ฝั่งซ้าย -->
+
+                <div class="col-lg-7 pe-lg-5">
+
+                  <div>
+
+                    <span class="btn tag-badge bg-danger">City</span>
+
+                    <span class="btn tag-badge bg-primary">Street Food</span>
+
+                    <span class="btn tag-badge bg-warning text-dark">Culture</span>
+
+                    <span class="btn tag-badge bg-dark text-light border border-secondary">เดินทางง่าย</span>
+
+                  </div>
+
+                  <h1 class="display-4 fw-bold mt-2 mb-3">กรุงเทพฯ</h1>
+
+                  <p class="fs-5 text-light opacity-75 mb-4">เมืองที่เที่ยวได้ทั้งวันทั้งคืน ครบทั้งวัด คาเฟ่
+
+                    แหล่งช้อปปิ้ง และอาหารสตรีทฟู้ดระดับโลก เหมาะกับทุกสไตล์</p>
+
+
+
+                  <div class="d-flex gap-2 flex-wrap">
+
+                    <button class="btn btn-danger btn-custom">ย่านน่าเดิน</button>
+
+                    <button class="btn btn-outline-light btn-custom">คาเฟ่</button>
+
+                    <button class="btn btn-outline-primary btn-custom">วัด/พิพิธภัณฑ์</button>
+
+                    <button class="btn btn-light btn-custom">อาหาร</button>
+
+                  </div>
+
+
+
+                  <div class="highlight-box">
+
+                    <img
+                      src="https://cms.dmpcdn.com/travel/2020/02/24/e023bbd0-56e1-11ea-996a-0d67e83ef09c_original.JPG">
+
+                    <div class="flex-grow-1">
+
+                      <h5 class="mb-1 fw-bold">แนะนำ: วัดอรุณราชวราราม</h5>
+
+                      <p class="mb-0 small text-light opacity-75">ไหว้พระ วัดสวย กรุงเทพ วัดอรุณราชวราราม
+
+                        พระปรางค์วัดอรุณ
+
+                        ริมแม่น้ำเจ้าพระยา</p>
+
+                    </div>
+
+                    <span class="badge bg-warning text-dark">Must Go</span>
+
+                  </div>
+
+
+
+                  <div class="tip-box shadow">
+
+                    Tip: ถ้าขับรถไม่สะดวก ลองวางแผนเที่ยวตามแนว BTS/MRT เพื่อประหยัดเวลา
+
+                  </div>
+
+                </div>
+
+
+
+                <!-- ฝั่งขวา -->
+
+                <div class="col-lg-5 mt-5 mt-lg-0">
+
+                  <div class="glass-card">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                      <h4 class="fw-bold mb-0">ไฮไลต์ยอดนิยม</h4>
+
+                      <span class="badge bg-danger">Hot</span>
+
+                    </div>
+
+                    <ul class="custom-list mb-4">
+
+                      <li>เยาวราช (ของกิน)</li>
+
+                      <li>เจริญกรุง (เดินเล่น, แกลเลอรี่)</li>
+
+                      <li>พระนคร (วัด, สถาปัตยกรรม)</li>
+
+                    </ul>
+
+                    <div class="d-grid gap-2">
+
+                      <div class="badge border border-light text-light p-2" style="font-weight: normal;">
+
+                        เหมาะกับ: เที่ยวสั้นๆ
+
+                      </div>
+
+                      <div class="badge bg-danger p-2" style="font-weight: normal;">
+
+                        ช่วงแนะนำ: ได้ทั้งปี
+
+                      </div>
+
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+
+                      <small class="text-secondary">Slide 5</small>
+
+                      <a href="booking.html"
+                        class="btn btn-outline-warning badge bg-danger border border-secondary text-decoration-none">จองเลย</a>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>>
+
+      </div>
+
+      <!-- ลูกศรควบคุม ซ้าย-ขวา -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#travelCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#travelCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

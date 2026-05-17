@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Booking | Thailand Travel</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background: url('https://blog.bangkokair.com/wp-content/uploads/2024/10/Cover_bangkok-travel-guide-thailand-capital.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      font-family: 'Sarabun', sans-serif;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+
+    .booking-section {
+      padding-top: 100px;
+      padding-bottom: 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 25px;
+      padding: 40px;
+      transition: all 0.4s ease;
+    }
+
+    .form-label {
+      color: #ffc107;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .form-control,
+    .form-select {
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 12px;
+      font-weight: 500;
+      height: 45px;
+    }
+
+    #price-display {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      padding: 25px;
+      border-left: 5px solid #ffc107;
+      margin: 20px 0;
+    }
+
+    .btn-confirm {
+      background: linear-gradient(45deg, #ffc107, #ff9800);
+      color: #000;
+      border: none;
+      border-radius: 12px;
+      padding: 12px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn-confirm:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 193, 7, 0.3);
+      color: #000;
+    }
+
+    .payment-box {
+      background: #fff;
+      color: #333;
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 400px;
+    }
+
+    .discount-badge {
+      background: #dc3545;
+      color: white;
+      padding: 2px 10px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">TH-TRAVEL</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="trip.html">หน้าแรก</a></li>
+          <li class="nav-item"><a class="nav-link" href="tour.html">ทัวร์แนะนำ</a></li>
+          <li class="nav-item"><a class="nav-link active" href="booking.html">จองเลย</a></li>
+          <li class="nav-item"><a class="nav-link" href="Save.html">บันทึกไว้</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="booking-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <!-- ส่วนของฟอร์มการจอง -->
+          <div class="glass-card shadow-lg mb-4">
+            <h2 class="fw-bold mb-4 text-warning text-center"><i class="bi bi-send-fill me-2"></i>จองทริปของคุณ</h2>
+
+            <form id="bookingForm" class="row g-3">
+              <div class="col-12">
+                <label class="form-label">📍 จุดหมายปลายทาง</label>
+                <select class="form-select shadow-sm" id="location" required>
+                  <option value="" selected disabled>--- คลิกเพื่อเลือกจังหวัด ---</option>
+                  <option value="1850">กรุงเทพฯ (1,850.-/วัน)</option>
+                  <option value="1300">กระบี่ (1,300.-/วัน)</option>
+                  <option value="1150">กาญจนบุรี (1,150.-/วัน)</option>
+                  <option value="1050">กาฬสินธุ์ (1,050.-/วัน)</option>
+                  <option value="1250">กำแพงเพชร (1,250.-/วัน)</option>
+                  <option value="1400">ขอนแก่น (1,400.-/วัน)</option>
+                  <option value="1350">จันทบุรี (1,350.-/วัน)</option>
+                  <option value="1200">ฉะเชิงเทรา (1,200.-/วัน)</option>
+                  <option value="1600">ชลบุรี (1,600.-/วัน)</option>
+                  <option value="1100">ชัยนาท (1,100.-/วัน)</option>
+                  <option value="1050">ชัยภูมิ (1,050.-/วัน)</option>
+                  <option value="1250">ชุมพร (1,250.-/วัน)</option>
+                  <option value="1550">เชียงราย (1,550.-/วัน)</option>
+                  <option value="1700">เชียงใหม่ (1,700.-/วัน)</option>
+                  <option value="1200">ตรัง (1,200.-/วัน)</option>
+                  <option value="1150">ตราด (1,150.-/วัน)</option>
+                  <option value="1050">ตาก (1,050.-/วัน)</option>
+                  <option value="1100">นครนายก (1,100.-/วัน)</option>
+                  <option value="1300">นครปฐม (1,300.-/วัน)</option>
+                  <option value="1050">นครพนม (1,050.-/วัน)</option>
+                  <option value="1450">นครราชสีมา (1,450.-/วัน)</option>
+                  <option value="1250">นครศรีธรรมราช (1,250.-/วัน)</option>
+                  <option value="1200">นครสวรรค์ (1,200.-/วัน)</option>
+                  <option value="1400">นนทบุรี (1,400.-/วัน)</option>
+                  <option value="1000">นราธิวาส (1,000.-/วัน)</option>
+                  <option value="1150">น่าน (1,150.-/วัน)</option>
+                  <option value="1050">บึงกาฬ (1,050.-/วัน)</option>
+                  <option value="1350">บุรีรัมย์ (1,350.-/วัน)</option>
+                  <option value="1300">ปทุมธานี (1,300.-/วัน)</option>
+                  <option value="1500">ประจวบคีรีขันธ์ (1,500.-/วัน)</option>
+                  <option value="1150">ปราจีนบุรี (1,150.-/วัน)</option>
+                  <option value="1000">ปัตตานี (1,000.-/วัน)</option>
+                  <option value="1400">พระนครศรีอยุธยา (1,400.-/วัน)</option>
+                  <option value="1100">พะเยา (1,100.-/วัน)</option>
+                  <option value="1450">พังงา (1,450.-/วัน)</option>
+                  <option value="1150">พัทลุง (1,150.-/วัน)</option>
+                  <option value="1050">พิจิตร (1,050.-/วัน)</option>
+                  <option value="1300">พิษณุโลก (1,300.-/วัน)</option>
+                  <option value="1550">เพชรบุรี (1,550.-/วัน)</option>
+                  <option value="1200">เพชรบูรณ์ (1,200.-/วัน)</option>
+                  <option value="1100">แพร่ (1,100.-/วัน)</option>
+                  <option value="2800">ภูเก็ต (2,800.-/วัน)</option>
+                  <option value="1050">มหาสารคาม (1,050.-/วัน)</option>
+                  <option value="1050">มุกดาหาร (1,050.-/วัน)</option>
+                  <option value="1350">แม่ฮ่องสอน (1,350.-/วัน)</option>
+                  <option value="1050">ยโสธร (1,050.-/วัน)</option>
+                  <option value="1000">ยะลา (1,000.-/วัน)</option>
+                  <option value="1200">ร้อยเอ็ด (1,200.-/วัน)</option>
+                  <option value="1300">ระนอง (1,300.-/วัน)</option>
+                  <option value="1650">ระยอง (1,650.-/วัน)</option>
+                  <option value="1200">ราชบุรี (1,200.-/วัน)</option>
+                  <option value="1150">ลพบุรี (1,150.-/วัน)</option>
+                  <option value="1250">ลำปาง (1,250.-/วัน)</option>
+                  <option value="1150">ลำพูน (1,150.-/วัน)</option>
+                  <option value="1200">เลย (1,200.-/วัน)</option>
+                  <option value="1050">ศรีสะเกษ (1,050.-/วัน)</option>
+                  <option value="1100">สกลนคร (1,100.-/วัน)</option>
+                  <option value="1500">สงขลา (1,500.-/วัน)</option>
+                  <option value="1250">สตูล (1,250.-/วัน)</option>
+                  <option value="1400">สมุทรปราการ (1,400.-/วัน)</option>
+                  <option value="1200">สมุทรสงคราม (1,200.-/วัน)</option>
+                  <option value="1300">สมุทรสาคร (1,300.-/วัน)</option>
+                  <option value="1100">สระแก้ว (1,100.-/วัน)</option>
+                  <option value="1250">สระบุรี (1,250.-/วัน)</option>
+                  <option value="1050">สิงห์บุรี (1,050.-/วัน)</option>
+                  <option value="1150">สุโขทัย (1,150.-/วัน)</option>
+                  <option value="1200">สุพรรณบุรี (1,200.-/วัน)</option>
+                  <option value="1750">สุราษฎร์ธานี (1,750.-/วัน)</option>
+                  <option value="1100">สุรินทร์ (1,100.-/วัน)</option>
+                  <option value="1150">หนองคาย (1,150.-/วัน)</option>
+                  <option value="1050">หนองบัวลำภู (1,050.-/วัน)</option>
+                  <option value="1100">อ่างทอง (1,100.-/วัน)</option>
+                  <option value="1050">อำนาจเจริญ (1,050.-/วัน)</option>
+                  <option value="1400">อุดรธานี (1,400.-/วัน)</option>
+                  <option value="1100">อุตรดิตถ์ (1,100.-/วัน)</option>
+                  <option value="1100">อุทัยธานี (1,100.-/วัน)</option>
+                  <option value="1350">อุบลราชธานี (1,350.-/วัน)</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">🗓️ วันที่เริ่มเดินทาง</label>
+                <input type="date" class="form-control" id="startDate" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">🗓️ วันที่เดินทางกลับ</label>
+                <input type="date" class="form-control" id="endDate" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">👨‍👩‍👦 ผู้ใหญ่</label>
+                <input type="number" class="form-control" id="adults" min="1" value="1">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">👶 เด็ก (ลด 50%)</label>
+                <input type="number" class="form-control" id="children" min="0" value="0">
+              </div>
+
+              <!-- ส่วนแสดงราคาและส่วนลด -->
+              <div class="col-12" id="price-display">
+                <div class="row align-items-center">
+                  <div class="col-md-4 text-center border-end border-secondary">
+                    <p class="mb-0 small text-white-50">ระยะเวลา</p>
+                    <h4 class="mb-0"><span id="totalDays">0</span> วัน</h4>
+                  </div>
+                  <div class="col-md-4 text-center border-end border-secondary">
+                    <p class="mb-0 small text-white-50">ส่วนลดพิเศษ</p>
+                    <h4 class="mb-0 text-info"><span id="discountText">0</span>%</h4>
+                  </div>
+                  <div class="col-md-4 text-center">
+                    <p class="mb-0 small text-white-50">ยอดรวมสุทธิ</p>
+                    <h3 class="mb-0 text-warning fw-bold"><span id="totalPrice">0</span>.-</h3>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 d-flex gap-2">
+                <button type="reset" class="btn btn-outline-light w-25" onclick="resetDisplay()">ล้างข้อมูล</button>
+                <button type="button" class="btn btn-confirm w-75" onclick="processBooking()">ยืนยันการจองทริป</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- ส่วนช่องทางชำระเงิน (ซ่อนไว้ก่อน) -->
+          <div id="paymentSection" class="glass-card shadow-lg d-none">
+            <h3 class="fw-bold mb-4 text-warning text-center"><i class="bi bi-wallet2 me-2"></i>ช่องทางชำระเงิน</h3>
+            <div class="text-center">
+              <p class="text-white">กรุณาชำระเงินภายใน 24 ชม. เพื่อรักษาสิทธิ์การจองของคุณ</p>
+
+              <div class="payment-box shadow">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/KBank_Logo.svg" width="50" class="mb-2">
+                <h5 class="fw-bold mb-1">ธนาคารกสิกรไทย</h5>
+                <p class="fs-5 mb-1 text-primary fw-bold">000-0-00000-0</p>
+                <p class="mb-0 text-muted">ชื่อบัญชี: บจก. ไทยแลนด์ ทราเวล กรุ๊ป</p>
+              </div>
+
+              <div class="mt-4">
+                <p class="small text-white-50 mb-3">เมื่อโอนเงินเรียบร้อยแล้ว โปรดส่งสลิปมาที่</p>
+                <div class="d-flex justify-content-center gap-3">
+                  <button class="btn btn-success btn-sm"><i class="bi bi-line me-1"></i> LINE
+                    Official</button>
+                  <button class="btn btn-primary btn-sm"><i class="bi bi-facebook me-1"></i>
+                    Messenger</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function calculateCost() {
+      const locationPrice = parseFloat(document.getElementById('location').value) || 0;
+      const startDateStr = document.getElementById('startDate').value;
+      const endDateStr = document.getElementById('endDate').value;
+      const adults = parseInt(document.getElementById('adults').value) || 0;
+      const children = parseInt(document.getElementById('children').value) || 0;
+
+      if (startDateStr && endDateStr) {
+        const startDate = new Date(startDateStr);
+        const endDate = new Date(endDateStr);
+
+        if (endDate > startDate) {
+          const timeDiff = endDate - startDate;
+          const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+          // --- Logic ส่วนลดเหมาวัน ---
+          let discountRate = 0;
+          if (days >= 7) {
+            discountRate = 0.15; // จอง 1 สัปดาห์ขึ้นไป ลด 15%
+          } else if (days >= 3) {
+            discountRate = 0.05; // จอง 3 วันขึ้นไป ลด 5%
+          }
+
+          let pricePerDay = (adults * locationPrice) + (children * (locationPrice * 0.5));
+          let subTotal = pricePerDay * days;
+          let finalTotal = subTotal * (1 - discountRate);
+
+          document.getElementById('totalDays').innerText = days;
+          document.getElementById('discountText').innerText = (discountRate * 100);
+          document.getElementById('totalPrice').innerText = finalTotal.toLocaleString();
+        } else {
+          resetDisplay();
+        }
+      }
+    }
+
+    function resetDisplay() {
+      document.getElementById('totalDays').innerText = "0";
+      document.getElementById('totalPrice').innerText = "0";
+      document.getElementById('discountText').innerText = "0";
+      document.getElementById('paymentSection').classList.add('d-none');
+    }
+
+    function processBooking() {
+      const total = document.getElementById('totalPrice').innerText;
+      if (total !== "0") {
+        alert("🎉 บันทึกการจองสำเร็จ!\nระบบกำลังนำคุณไปยังขั้นตอนการชำระเงิน");
+        const paymentDiv = document.getElementById('paymentSection');
+        paymentDiv.classList.remove('d-none');
+        paymentDiv.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        alert("⚠️ กรุณาเลือกจังหวัดและระบุวันที่เดินทางให้ถูกต้อง");
+      }
+    }
+
+    // ฟังการเปลี่ยนแปลงข้อมูล
+    document.querySelectorAll('#bookingForm input, #bookingForm select').forEach(item => {
+      item.addEventListener('change', calculateCost);
+    });
+
+    // ระบบรับค่าจากหน้าอื่น
+    window.onload = function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const locName = urlParams.get('location');
+      if (locName) {
+        const select = document.getElementById('location');
+        for (let i = 0; i < select.options.length; i++) {
+          if (select.options[i].text.includes(locName)) {
+            select.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      calculateCost();
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

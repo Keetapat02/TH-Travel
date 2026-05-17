@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saved Trips | Thailand Travel</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background: url('https://cdn.britannica.com/06/96306-050-DFE8AFDC/Khao-Tapu-Ao-Phang-na-Thailand-National-Park.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Sarabun', sans-serif;
+      min-height: 100vh;
+      color: #fff;
+      padding-top: 100px;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    .glass-container {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 25px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    }
+
+    .table {
+      color: white;
+      margin-bottom: 0;
+    }
+
+    .table thead th {
+      background: rgba(255, 193, 7, 0.2);
+      color: #ffc107;
+      border: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .table tbody td {
+      border-color: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .status-badge {
+      padding: 5px 12px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .bg-ready {
+      background: #198754;
+      color: #fff;
+    }
+
+    .bg-wait {
+      background: #ffc107;
+      color: #000;
+    }
+
+    .btn-book {
+      background: #ffc107;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 10px;
+      padding: 5px 15px;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-book:hover {
+      background: #fff;
+      transform: scale(1.05);
+      color: #000;
+    }
+
+    /* สไตล์สำหรับช่องแก้ไขหมายเหตุ */
+    .note-input {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      border-radius: 8px;
+      padding: 5px;
+      width: 100%;
+    }
+
+    .editable-note {
+      cursor: pointer;
+      transition: 0.2s;
+      display: block;
+      padding: 5px;
+      border-radius: 5px;
+    }
+
+    .editable-note:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .price-text {
+      color: #ffc107;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">TH-TRAVEL</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="trip.html">หน้าแรก</a></li>
+          <li class="nav-item"><a class="nav-link" href="Tour.html">ทัวร์แนะนำ</a></li>
+          <li class="nav-item"><a class="nav-link active" href="booking.html">จองเลย</a></li>
+          <li class="nav-item"><a class="nav-link" href="Save.html">บันทึกไว้</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">ติดต่อเรา</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-white"><i class="bi bi-bookmark-heart-fill text-warning me-2"></i>ทริปที่สนใจ (Save trip)
+      </h2>
+    </div>
+
+    <div class="glass-container">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ลำดับ</th>
+              <th>จังหวัด</th>
+              <th>งบประมาณต่อวัน</th>
+              <th>สถานะ</th>
+              <th>หมายเหตุ</th>
+              <th>ดำเนินการ</th>
+            </tr>
+          </thead>
+          <tbody id="saved-trips-list"></tbody>
+        </table>
+      </div>
+      <div class="mt-4 p-3 bg-dark bg-opacity-50 rounded border border-secondary">
+        <p class="mb-0 text-white small">
+          <i class="bi bi-info-circle-fill text-warning me-2"></i>
+          <strong>Tip:</strong>
+          คลิกที่ "หมายเหตุ" เพื่อแก้ไขข้อความของคุณ
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function displaySavedTrips() {
+      const listBody = document.getElementById('saved-trips-list');
+      const savedTrips = JSON.parse(localStorage.getItem('mySavedTrips')) || [];
+
+      if (savedTrips.length === 0) {
+        listBody.innerHTML = '<tr><td colspan="6" class="text-center py-5 opacity-50">ไม่มีข้อมูลการบันทึกทริป</td></tr>';
+        return;
+      }
+
+      listBody.innerHTML = '';
+      savedTrips.forEach((trip, index) => {
+        const statusClass = trip.status === 'พร้อมเดินทาง' ? 'bg-ready' : 'bg-wait';
+        const row = `
+            <tr>
+              <td>${index + 1}</td>
+              <td class="fw-bold">${trip.province}</td>
+              <td class="price-text">${trip.price}</td>
+              <td><span class="status-badge ${statusClass}">${trip.status}</span></td>
+              <td id="note-container-${trip.id}">
+                <span class="editable-note small" onclick="editNote(${trip.id}, '${trip.note}')">
+                  ${trip.note || '-'} <i class="bi bi-pencil-square ms-1 opacity-50"></i>
+                </span>
+              </td>
+              <td>
+                <div class="d-flex justify-content-center gap-2">
+                    <a href="booking.html?location=${trip.province}" class="btn btn-book btn-sm shadow-sm">จองเลย</a>
+                    <button class="btn btn-danger btn-sm shadow-sm" onclick="deleteTrip(${trip.id})">ลบ</button>
+                </div>
+              </td>
+            </tr>
+        `;
+        listBody.innerHTML += row;
+      });
+    }
+
+    // ฟังก์ชันเปลี่ยนเป็นช่อง Input เพื่อแก้ไข
+    function editNote(id, currentNote) {
+      const container = document.getElementById(`note-container-${id}`);
+      container.innerHTML = `
+        <div class="input-group input-group-sm">
+          <input type="text" id="input-${id}" class="form-control note-input" value="${currentNote}">
+          <button class="btn btn-success btn-sm" onclick="saveNote(${id})"><i class="bi bi-check-lg"></i></button>
+          <button class="btn btn-secondary btn-sm" onclick="displaySavedTrips()"><i class="bi bi-x-lg"></i></button>
+        </div>
+      `;
+      document.getElementById(`input-${id}`).focus();
+    }
+
+    // ฟังก์ชันบันทึกค่าใหม่ลง LocalStorage
+    function saveNote(id) {
+      const newNote = document.getElementById(`input-${id}`).value;
+      let savedTrips = JSON.parse(localStorage.getItem('mySavedTrips')) || [];
+
+      // ค้นหาและอัปเดตหมายเหตุ
+      savedTrips = savedTrips.map(trip => {
+        if (trip.id === id) {
+          return { ...trip, note: newNote };
+        }
+        return trip;
+      });
+
+      localStorage.setItem('mySavedTrips', JSON.stringify(savedTrips));
+      displaySavedTrips(); // โหลดตารางใหม่เพื่อแสดงผลที่อัปเดต
+    }
+
+    function deleteTrip(id) {
+      if (confirm('คุณต้องการลบทริปนี้ใช่หรือไม่?')) {
+        let savedTrips = JSON.parse(localStorage.getItem('mySavedTrips')) || [];
+        savedTrips = savedTrips.filter(trip => trip.id !== id);
+        localStorage.setItem('mySavedTrips', JSON.stringify(savedTrips));
+        displaySavedTrips();
+      }
+    }
+
+    window.onload = displaySavedTrips;
+  </script>
+</body>
+
+</html>
